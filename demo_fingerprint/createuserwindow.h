@@ -15,7 +15,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QLabel>
-
+#include "finger.h"
 namespace Ui {
 class createuserwindow;
 }
@@ -43,7 +43,7 @@ private slots:
 private:
 
     Ui::createuserwindow *ui;
-    int create_user(void);
+
 };
 
 #endif // CREATEUSERWINDOW_H

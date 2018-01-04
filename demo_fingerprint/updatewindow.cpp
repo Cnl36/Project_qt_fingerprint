@@ -70,3 +70,198 @@ void updatewindow::on_pushButton_clicked()
 
 
 }
+
+void updatewindow::on_pushButton_4_clicked()
+{
+    QString p = ui->Line_code->text();
+    QByteArray ba = p.toLatin1();
+    char *q = ba.data();
+    qDebug()<<*q;
+    char *finger_type="first_finger";
+    int r = 1;
+    struct fp_dscv_dev *ddev;
+    struct fp_dscv_dev **discovered_devs;
+    struct fp_dev *dev;
+    struct fp_print_data *data;
+
+    printf("This program will enroll your right index finger, "
+        "unconditionally overwriting any right-index print that was enrolled "
+        "previously. If you want to continue, press enter, otherwise hit "
+        "Ctrl+C\n");
+
+    r = fp_init();
+    if (r < 0) {
+         fprintf(stderr, "Failed to initialize libfprint\n");
+            exit(1);
+    }
+    fp_set_debug(3);
+
+    discovered_devs = fp_discover_devs();
+    if (!discovered_devs) {
+         fprintf(stderr, "Could not discover devices\n");
+        goto out;
+    }
+
+    ddev = discover_device(discovered_devs);
+    if (!ddev) {
+         fprintf(stderr, "No devices detected.\n");
+         goto out;
+    }
+
+    dev = fp_dev_open(ddev);
+    fp_dscv_devs_free(discovered_devs);
+    if (!dev) {
+         fprintf(stderr, "Could not open device.\n");
+         goto out;
+    }
+
+    printf("Opened device. It's now time to enroll your finger.\n\n");
+
+    data = enroll(dev);
+    if (!data)
+         goto out_close;
+    unsigned char* ret;
+    size_t ret_size;
+    ret_size=fp_print_data_get_data(data,&ret);
+    qDebug()<<ret_size;
+    update_data_to_db(ret, ret_size,finger_type,q);
+
+
+ out_close:
+       fp_dev_close(dev);
+ out:
+       fp_exit();
+
+   free(ret);
+    fp_print_data_free(data);
+}
+
+void updatewindow::on_pushButton_5_clicked()
+{
+    QString p = ui->Line_code->text();
+    QByteArray ba = p.toLatin1();
+    char *q = ba.data();
+    qDebug()<<*q;
+    char *finger_type="second_finger";
+    int r = 1;
+    struct fp_dscv_dev *ddev;
+    struct fp_dscv_dev **discovered_devs;
+    struct fp_dev *dev;
+    struct fp_print_data *data;
+
+    printf("This program will enroll your right index finger, "
+        "unconditionally overwriting any right-index print that was enrolled "
+        "previously. If you want to continue, press enter, otherwise hit "
+        "Ctrl+C\n");
+
+    r = fp_init();
+    if (r < 0) {
+         fprintf(stderr, "Failed to initialize libfprint\n");
+            exit(1);
+    }
+    fp_set_debug(3);
+
+    discovered_devs = fp_discover_devs();
+    if (!discovered_devs) {
+         fprintf(stderr, "Could not discover devices\n");
+        goto out;
+    }
+
+    ddev = discover_device(discovered_devs);
+    if (!ddev) {
+         fprintf(stderr, "No devices detected.\n");
+         goto out;
+    }
+
+    dev = fp_dev_open(ddev);
+    fp_dscv_devs_free(discovered_devs);
+    if (!dev) {
+         fprintf(stderr, "Could not open device.\n");
+         goto out;
+    }
+
+    printf("Opened device. It's now time to enroll your finger.\n\n");
+
+    data = enroll(dev);
+    if (!data)
+         goto out_close;
+    unsigned char* ret;
+    size_t ret_size;
+    ret_size=fp_print_data_get_data(data,&ret);
+    qDebug()<<ret_size;
+    update_data_to_db(ret, ret_size,finger_type,q);
+
+
+ out_close:
+       fp_dev_close(dev);
+ out:
+       fp_exit();
+
+   free(ret);
+    fp_print_data_free(data);
+}
+
+void updatewindow::on_pushButton_6_clicked()
+{
+    QString p = ui->Line_code->text();
+    QByteArray ba = p.toLatin1();
+    char *q = ba.data();
+    qDebug()<<*q;
+    char *finger_type="third_finger";
+    int r = 1;
+    struct fp_dscv_dev *ddev;
+    struct fp_dscv_dev **discovered_devs;
+    struct fp_dev *dev;
+    struct fp_print_data *data;
+
+    printf("This program will enroll your right index finger, "
+        "unconditionally overwriting any right-index print that was enrolled "
+        "previously. If you want to continue, press enter, otherwise hit "
+        "Ctrl+C\n");
+
+    r = fp_init();
+    if (r < 0) {
+         fprintf(stderr, "Failed to initialize libfprint\n");
+            exit(1);
+    }
+    fp_set_debug(3);
+
+    discovered_devs = fp_discover_devs();
+    if (!discovered_devs) {
+         fprintf(stderr, "Could not discover devices\n");
+        goto out;
+    }
+
+    ddev = discover_device(discovered_devs);
+    if (!ddev) {
+         fprintf(stderr, "No devices detected.\n");
+         goto out;
+    }
+
+    dev = fp_dev_open(ddev);
+    fp_dscv_devs_free(discovered_devs);
+    if (!dev) {
+         fprintf(stderr, "Could not open device.\n");
+         goto out;
+    }
+
+    printf("Opened device. It's now time to enroll your finger.\n\n");
+
+    data = enroll(dev);
+    if (!data)
+         goto out_close;
+    unsigned char* ret;
+    size_t ret_size;
+    ret_size=fp_print_data_get_data(data,&ret);
+    qDebug()<<ret_size;
+    update_data_to_db(ret, ret_size,finger_type,q);
+
+
+ out_close:
+       fp_dev_close(dev);
+ out:
+       fp_exit();
+
+   free(ret);
+    fp_print_data_free(data);
+}

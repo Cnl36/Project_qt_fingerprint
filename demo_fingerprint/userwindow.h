@@ -4,6 +4,7 @@
 #include "finger.h"
 #include "mysql.h"
 #include "updatewindow.h"
+#include <QMessageBox>
 namespace Ui {
 class userwindow;
 }

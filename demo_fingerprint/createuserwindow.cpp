@@ -32,104 +32,22 @@ void createuserwindow::on_pushButton_clicked(){
     w2->show();
 }
 
-int createuserwindow::create_user(void)
-{
-    int r = 1;
-    struct fp_dscv_dev *ddev;
-    struct fp_dscv_dev **discovered_devs;
-    struct fp_dev *dev;
-    struct fp_print_data *data;
-   // QLabel *label =this->findChild<QLabel *>("news");
-    printf("This program will enroll your right index finger, "
-           "unconditionally overwriting any right-index print that was enrolled "
-        "previously. If you want to continue, press enter, otherwise hit "
-        "Ctrl+C\n");
-       r = fp_init();
-    if (r < 0) {
-        fprintf(stderr, "Failed to initialize libfprint\n");
-        exit(1);
-     }
-    fp_set_debug(3);
-
-    discovered_devs = fp_discover_devs();
-    if (!discovered_devs) {
-         fprintf(stderr, "Could not discover devices\n");
-         goto out;
-     }
-
-    ddev = discover_device(discovered_devs);
-    if (!ddev) {
-        fprintf(stderr, "No devices detected.\n");
-         goto out;
-     }
-
-    dev = fp_dev_open(ddev);
-    fp_dscv_devs_free(discovered_devs);
-    if (!dev) {
-    fprintf(stderr, "Could not open device.\n");
-         goto out;
-        }
-
-    printf("Opened device. It's now time to enroll your finger.\n\n");
-    data = enroll(dev);
-    if (!data)
-         goto out_close;
-    unsigned char* ret;
-    size_t ret_size;
-    ret_size=fp_print_data_get_data(data,&ret);
-        qDebug()<<ret_size;
-   free(ret);
-   fp_print_data_free(data);
-   out_close:
-      fp_dev_close(dev);
-   out:
-      fp_exit();
-
-   return r;
-}
 
 void createuserwindow::on_pushButton_3_clicked(){
 
     QSqlDatabase firstdb=QSqlDatabase::addDatabase("QMYSQL");
-    firstdb.setHostName("192.168.68.122");
+    firstdb.setHostName("localhost");
     firstdb.setDatabaseName("db_fingerprint");
-    firstdb.setUserName("user");
-    firstdb.setPassword("password");
+    firstdb.setUserName("root");
+    firstdb.setPassword("root");
 
-//    if(db.open()){
-//        qDebug()<<"thanhcong";
-//    }
-//    QString imagePath = QFileDialog::getSaveFileName(this,"Save image to","/home/chunglinh/Pictures","JPEG Image (*.pgm)");
-//        QModelIndex index;
-//        QSqlQueryModel model;
-//        QByteArray bytes;
-
-//        QSqlQuery query;
-//        query.exec("select image from users where idusers = 17 ");
-//        if (!query.exec())
-//        {
-//            QMessageBox::critical(this,"Query error",query.lastError().text());
-//        }
-//        else
-//        {
-//            //Set model
-//            model.setQuery(query);
-//            index = model.index(0,0);
-//            bytes = index.data().toByteArray();
-
-//            //Save image
-//            QImage imageWrite;
-//            imageWrite.loadFromData(bytes);
-//            qDebug()<<bytes;
-//            imageWrite.save(imagePath,"pgm");
-
-//        }
     if(firstdb.open()){
      QString name =ui->line_Name->text();
      QString ID =ui->line_ID->text();
      QString birthday =ui->dateEdit->text();
      QString address = ui->line_Ads->text();
      QString phone = ui->line_Phone->text();
+
      QString password = ui->line_Pw->text();
      QString gender = "other";
 
@@ -172,7 +90,7 @@ void createuserwindow::on_pushButton_4_clicked()
     QByteArray ba = p.toLatin1();
     char *q = ba.data();
     qDebug()<<*q;
-    char *finger_type="index finger";
+    char *finger_type="first_finger";
     int r = 1;
     struct fp_dscv_dev *ddev;
     struct fp_dscv_dev **discovered_devs;
@@ -238,7 +156,7 @@ void createuserwindow::on_pushButton_5_clicked()
     QByteArray ba = p.toLatin1();
     char *q = ba.data();
     qDebug()<<*q;
-    char *finger_type="Midlle finger";
+    char *finger_type="second_finger";
     int r = 1;
     struct fp_dscv_dev *ddev;
     struct fp_dscv_dev **discovered_devs;
@@ -303,7 +221,7 @@ void createuserwindow::on_pushButton_6_clicked()
     QByteArray ba = p.toLatin1();
     char *q = ba.data();
     qDebug()<<*q;
-    char *finger_type="Ring finger";
+    char *finger_type="third_finger";
     int r = 1;
     struct fp_dscv_dev *ddev;
     struct fp_dscv_dev **discovered_devs;

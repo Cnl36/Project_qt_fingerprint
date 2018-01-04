@@ -461,7 +461,7 @@ color: rgb(0, 255, 0);
 font: 13pt &quot;Sans Serif&quot;;</string>
    </property>
    <property name="text">
-    <string>middle_finger</string>
+    <string>second_finger</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_10">
@@ -509,7 +509,7 @@ color: rgb(0, 255, 0);
 font: 13pt &quot;Sans Serif&quot;;</string>
    </property>
    <property name="text">
-    <string>index_finger</string>
+    <string>first_finger</string>
    </property>
   </widget>
   <widget class="Line" name="line_4">
@@ -540,7 +540,7 @@ color: rgb(0, 255, 0);
 font: 13pt &quot;Sans Serif&quot;;</string>
    </property>
    <property name="text">
-    <string>ring_finger</string>
+    <string>third_finger</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_9">

@@ -583,6 +583,22 @@ color: rgb(170, 0, 0);</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_20">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>430</y>
+     <width>211</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(170, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string>please enroll your finger!</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

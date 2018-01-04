@@ -13,7 +13,6 @@ LoginPwWindow::LoginPwWindow(QWidget *parent) :
     ui->line_5->hide();
     ui->line_6->hide();
     ui->line_7->hide();
-
     ui->line_9->hide();
     ui->line_10->hide();
     ui->label_4->hide();
@@ -23,7 +22,6 @@ LoginPwWindow::LoginPwWindow(QWidget *parent) :
     ui->label_5->hide();
     ui->label_7->hide();
     ui->label_8->hide();
-
     ui->pushButton_4->hide();
     ui->pushButton_5->hide();
 }
@@ -49,8 +47,6 @@ void LoginPwWindow::on_pushButton_3_clicked()
 
     QString username = ui->username_line->text();
     QString password = ui->ID_line->text();
-
-
     QSqlQuery query;
 
     if (query.exec("SELECT * FROM users WHERE name='"+username+"'and password='"+password+"'")){
@@ -94,8 +90,6 @@ void LoginPwWindow::on_pushButton_3_clicked()
             ui->label_12->setText(address);
 
               }
-
-
        }
        else{
            qDebug()<<"chua dang nhap thanh cong";

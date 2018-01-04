@@ -92,9 +92,6 @@ void verify1::on_pushButton_2_clicked()
         mysql_close(con);
 
       }
-//    char query[300];
-//    sprintf(query, "SELECT image FROM users");
-//    if (mysql_query(con, query))
 
     if (mysql_query(con, "SELECT data FROM fingerprints where idfingerprints=1"))
       {

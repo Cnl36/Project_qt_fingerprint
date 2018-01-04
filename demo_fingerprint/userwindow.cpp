@@ -20,6 +20,7 @@ ui->label_19->setPixmap(pix2.scaled(180,170,Qt::KeepAspectRatio));
 ui->label->hide();
 ui->pushButton->hide();
 ui->label_19->hide();
+ui->label_20->hide();
   }
 
 userwindow::~userwindow()
@@ -41,6 +42,7 @@ struct fp_img *img = NULL;
 int *nr_minutiae;
 void userwindow::on_confirm_button_clicked()
 {
+
 
     MYSQL *con;
     init_mysql(con);
@@ -112,23 +114,22 @@ void userwindow::on_confirm_button_clicked()
       }
 
       dev = fp_dev_open(ddev);
+
+
       fp_dscv_devs_free(discovered_devs);
       if (!dev) {
         qDebug() << "Could not open device.\n";
       }
+ui->label_20->show();
+      //qDebug() << "Opened device\n\n";
 
-      qDebug() << "Opened device\n\n";
 
 
-//    QLabel *label = this->findChild<QLabel *>("identifyMsg");
-
-//    label->setText("Please enroll your finger!");
-//    label->setStyleSheet("QLabel {color : blue; }");
-//    qApp->processEvents();
     size_t match_index;
     match_index = -1;
 //struct fp_img *img = NULL;
    r = fp_identify_finger_img(dev, print_gallery,&match_index,&img);
+
 
     if (img) {
 
@@ -137,9 +138,7 @@ void userwindow::on_confirm_button_clicked()
         new_img = fp_img_binarize(img);
         fp_img_save_to_file(new_img, "/home/chunglinh/Pictures/print1.pgm");
         fp_img_free(new_img);
-//        fp_img_save_to_file(img, "/home/chunglinh/Pictures/print.pgm");
-//  //        qDebug()<<"Wrote scanned image to verify.pgm\n";
-//        fp_img_free(img);
+
     }
 
     if (r < 0) {
@@ -155,9 +154,6 @@ void userwindow::on_confirm_button_clicked()
 
     case FP_VERIFY_MATCH:
        printf("MATCH!\n");
-       qDebug()<<match_index;
-
-
        ui->label_8->setText(usernames[match_index]);
        ui->label_9->setText(user_ID[match_index]);
        ui->label_10->setText(user_gender[match_index]);

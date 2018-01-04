@@ -47,35 +47,33 @@ int save_data_to_db(unsigned char *data, size_t data_size,char *finger_type,char
   mysql_close(&con);
   return 0;
 }
+int update_data_to_db(unsigned char *data, size_t data_size,char *finger_type,char *q)
+{
 
-//int save_data_to_db(unsigned char *data, size_t data_size)
-//{
 
+  MYSQL con;
+  init_mysql(&con);
 
-//  MYSQL con;
-//  init_mysql(&con);
+  // done
 
-//  // done
+  // insert
+  int escaped_size = 2 * data_size + 1;
+  char chunk[escaped_size];
+  mysql_real_escape_string(&con, chunk, (const char*)data, data_size);
+  const char* query_template =  "UPDATE fingerprints set data='%s' where finger_type='%s' and users_idusers='%s'";
+  size_t template_len = strlen(query_template);
+  int query_buffer_len = template_len + escaped_size  + sizeof(data_size)+strlen(q)+strlen(finger_type);
+  char query[query_buffer_len];
+  // testAPI(chunk);
+  int query_len = snprintf(query, query_buffer_len, query_template,chunk,finger_type,q);
 
-//  // insert
-//  int escaped_size = 2 * data_size + 1;
-//  char chunk[escaped_size];
-//  mysql_real_escape_string(&con, chunk, (const char*)data, data_size);
-// // const char* query_template =  "INSERT INTO users(image) VALUES ('%s')";
-//  const char* query_template =  "INSERT INTO fingerprints(data_indexfinger) VALUES ('%s')";
+  if (mysql_real_query(&con, query, query_len))
+  {
+    printf("Something went wrong when update");
+    return 2;
+  }
 
-//  size_t template_len = strlen(query_template);
-//  int query_buffer_len = template_len + escaped_size  +sizeof(data_size);
-//  char query[query_buffer_len];
-//  // testAPI(chunk);
-//  int query_len = snprintf(query, query_buffer_len, query_template,chunk, data_size);
+  mysql_close(&con);
+  return 0;
+}
 
-//  if (mysql_real_query(&con, query, query_len))
-//  {
-//    printf("Something went wrong when INSERT");
-//    return 2;
-//  }
-
-//  mysql_close(&con);
-//  return 0;
-//}
