@@ -1,0 +1,42 @@
+#install fprint library
+  download at: https://www.freedesktop.org/wiki/Software/fprint/Download/
+  install packages: 
+    * libpam0g-dev
+    * libmagick++-dev
+    * libusb-1.0-0-dev
+    * libgtk2.0-dev
+    * libnss3-dev
+    $cd libfprint.
+    $sudo ./configure
+    $sudo make
+    $sudo make install
+
+#install driver mysql
+#install u.are.u SDK for linux
+
+There are two steps to the installation:
+1. Installing on the development system
+2. Installing on the device (the target hardware)
+These steps are described below.
+
+Installing on the Development System
+
+1- Download or copy from CD the file DP-UareU-2.2.0-1.20121203_1642.tar.gz somewhere under your /home/user directory.
+2- Extract or uncompress the DP-UareU-2.2.0-1.20121203_1642.tar.gz file contents into a temporary directory.
+3- Run install as root (sudo ./install) from the created temporary directory and the product installs into the system /opt directory. The user also has the option to install the DigitialPersona kernel module and load it automatically for development with the 4500 readers. The 5100 reader does not require installation of the DigitialPersona kernel module.  
+
+Installing on the Target Hardware
+
+1- Copy the appropriate tarballs from /opt/DigitalPersona/redist to the target x86, x64, or ARM device and unpack them.
+2- Copy the /opt/DigitalPersona/UareUSDK/Linux/Samples contents to the target x86, x64, or ARM device. 
+3- Export the LD_LIBRARY_PATH to the /opt/DigitalPersona/UareUSDK/Linux/lib directory.
+4- Plug in the reader. 
+5- Execute the samples. 
+#detach usb
+-check device in system:
+ $cd /dev
+ $ls
+-$cd detachusb
+-$sudo ./usbdetach -v -v /dev/name_device
+
+#cross-compiling qt-program from ubuntu-->raspbian
